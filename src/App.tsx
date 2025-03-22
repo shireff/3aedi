@@ -8,7 +8,7 @@ import { MarketingResults } from "./components/MarketingResults";
 import { Sidebar } from "./components/Sidebar";
 
 function App() {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
