@@ -14,6 +14,7 @@ import {
   Settings,
   ChevronRight,
   ChevronLeft,
+  Menu,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -44,46 +45,58 @@ export const Sidebar: React.FC<SidebarProps> = ({
   toggleSidebar,
 }) => {
   return (
-    <aside
-      className={`bg-white h-screen transition-all duration-300 ease-in-out ${
-        isSidebarCollapsed ? "w-16" : "w-64"
-      } md:block fixed md:relative z-30`}
-    >
+    <>
       <button
         onClick={toggleSidebar}
-        className="bg-white border rounded-full text-black px-2 py-2 absolute top-4 left-[-15px] z-10"
+        className={`bg-white border rounded-full text-black px-2 py-2 absolute top-4 right-4 z-10 md:hidden transition-all duration-300 ease-in-out ${
+          isSidebarCollapsed ? "block" : "hidden"
+        }`}
       >
-        {isSidebarCollapsed ? (
-          <ChevronLeft className="w-5 h-5" />
-        ) : (
-          <ChevronRight className="w-5 h-5" />
-        )}
+        <Menu className="w-5 h-5" />
       </button>
+      <aside
+        className={`bg-white h-screen transition-all duration-300 ease-in-out ${
+          isSidebarCollapsed ? "w-16" : "w-64"
+        } fixed md:relative z-30 ${
+          isSidebarCollapsed ? "md:w-16" : "md:w-64"
+        } ${isSidebarCollapsed ? "hidden" : "block"} md:block`}
+      >
+        <button
+          onClick={toggleSidebar}
+          className="bg-white border rounded-full text-black px-2 py-2 absolute top-4 left-[-15px] z-10"
+        >
+          {isSidebarCollapsed ? (
+            <ChevronLeft className="w-5 h-5" />
+          ) : (
+            <ChevronRight className="w-5 h-5" />
+          )}
+        </button>
 
-      <nav className="space-y-1">
-        {navItems.map((item, index) => (
-          <button
-            key={index}
-            className={`w-full flex items-center justify-between px-4 py-4 rounded-lg ${
-              item.active
-                ? "bg-blue-600 text-white"
-                : "text-gray-700 hover:bg-gray-50"
-            }`}
-          >
-            <div className="flex items-center gap-3">
-              {item.icon}
-              <span
-                className={`${
-                  isSidebarCollapsed ? "hidden" : "block"
-                } font-medium text-gray-700`}
-              >
-                {item.label}
-              </span>
-            </div>
-            {item.hasSubmenu && <ChevronDown className="w-4 h-4" />}
-          </button>
-        ))}
-      </nav>
-    </aside>
+        <nav className="space-y-1">
+          {navItems.map((item, index) => (
+            <button
+              key={index}
+              className={`w-full flex items-center justify-between px-4 py-4 rounded-lg ${
+                item.active
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-700 hover:bg-gray-50"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                {item.icon}
+                <span
+                  className={`${
+                    isSidebarCollapsed ? "hidden" : "block"
+                  } font-medium text-gray-700`}
+                >
+                  {item.label}
+                </span>
+              </div>
+              {item.hasSubmenu && <ChevronDown className="w-4 h-4" />}
+            </button>
+          ))}
+        </nav>
+      </aside>
+    </>
   );
 };

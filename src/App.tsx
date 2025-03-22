@@ -30,7 +30,7 @@ function App() {
     max-w-full w-full
   `}
         >
-          <div className="space-y-6">
+          <div className="container mx-auto space-y-6">
             <WarningBanner />
             <SuccessBanner />
             <StatsGrid />
